@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taco Loco</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            navbar.classList.add('bg-opacity-90', 'shadow-xl');
+        } else {
+            navbar.classList.remove('bg-opacity-90', 'shadow-xl');
+        }
+    });
+
+    function toggleMenu() {
+        const menu = document.getElementById('menu-mobile');
+        menu.classList.toggle('hidden');
+    }
+</script>
+
+
+<style>
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    .bg-animated-gradient {
+        background: linear-gradient(270deg, #f87171, #facc15, #fb923c);
+        background-size: 400% 400%;
+        animation: gradient 8s ease infinite;
+    }
+    .transition-all {
+    transition: all 0.3s ease-in-out;
+}
+#carrito-flotante {
+    animation: slideUp 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#carrito-flotante:hover {
+    transform: scale(1.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+    </style>
+    
+<body class="bg-gradient-to-br from-red-50 to-orange-50 font-['Poppins']">
+    <!-- Navbar Mejorado -->
+<nav id="navbar" class="fixed top-0 left-0 w-full z-50 bg-gradient-to-r from-red-600 to-orange-500 text-white shadow-lg transition-all duration-300">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+        <!-- Logo y Nombre -->
+        <div class="flex items-center space-x-3">
+            
+            <h1 class="text-xl font-bold md:text-2xl tracking-wider">El Taco Loco</h1>
+        </div>
+        
+        <!-- Enlaces de Navegación -->
+        <div class="hidden md:flex space-x-6">
+            <a href="#menu" class="hover:text-yellow-300 transition">Menú</a>
+            <a href="#bebidas" class="hover:text-yellow-300 transition">Bebidas</a>
+            <a href="#promociones" class="hover:text-yellow-300 transition">Promociones</a>
+            <a href="#contacto" class="hover:text-yellow-300 transition">Contacto</a>
+            <button id="carrito-btn" class="relative flex items-center">
+                <i class="fas fa-shopping-cart text-xl"></i>
+                <span id="contador-carrito" class="absolute -top-2 -right-2 bg-yellow-400 text-red-700 rounded-full px-2 text-xs">0</span>
+            </button>
+        </div>
+
+        <!-- Botón del Menú para Móviles -->
+        <button class="md:hidden focus:outline-none" onclick="toggleMenu()">
+            <i class="fas fa-bars text-2xl"></i>
+        </button>
+    </div>
+
+    <!-- Menú Desplegable para Móviles -->
+    <div id="menu-mobile" class="hidden bg-red-600 text-white text-center md:hidden">
+        <a href="#menu" class="block py-2 hover:bg-red-700">Menú</a>
+        <a href="#bebidas" class="block py-2 hover:bg-red-700">Bebidas</a>
+        <a href="#promociones" class="block py-2 hover:bg-red-700">Promociones</a>
+        <a href="#contacto" class="block py-2 hover:bg-red-700">Contacto</a>
+    </div>
+
+    <!-- Botón Flotante del Carrito para Móviles -->
+<div id="carrito-flotante" class="fixed bottom-4 right-4 bg-red-600 text-white p-4 rounded-full shadow-lg z-50 md:hidden">
+    <button id="carrito-btn-movil" onclick="abrirCarrito()" class="relative">
+        <i class="fas fa-shopping-cart text-2xl"></i>
+        <span id="contador-carrito-movil" class="absolute -top-2 -right-2 bg-yellow-400 text-red-700 rounded-full px-2 text-xs">0</span>
+    </button>
+</div>
+
+
+</nav>
+
+
+   <!-- Hero Section Mejorado -->
+   <header class="relative pt-20 pb-20 px-4 text-center text-white bg-animated-gradient">
+
+    <!-- Imagen de fondo con opacidad -->
+    <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('fondo-tacos.jpg');"></div>
+    <div class="relative z-10">
+        <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 drop-shadow-lg">
+            Taco Loco 🌮
+        </h1>
+        
+        <p class="text-xl md:text-2xl font-medium mb-8">
+            Más carne de lo que te prometió tu ex.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+            <a href="#menu" class="bg-yellow-400 text-red-700 px-6 py-3 rounded-full font-bold text-lg hover:bg-yellow-500 transition">
+                Ver Menú
+            </a>
+            <a href="#bebidas" class="bg-red-700 text-white px-6 py-3 rounded-full font-bold text-lg hover:bg-red-800 transition">
+                Bebidas 🍹
+            </a>
+            <a href="#promociones" class="bg-orange-600 text-white px-6 py-3 rounded-full font-bold text-lg hover:bg-orange-700 transition">
+                Promociones 💥
+            </a>
+        </div>
+    </div>
+</header>
+
+
+    <!-- Menú de Tacos -->
+    <section id="menu" class="container mx-auto py-12 px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-red-700">Nuestro Menú</h2>
+        <div id="productos" class="grid md:grid-cols-3 gap-6">
+            <!-- Los productos se generarán dinámicamente con JavaScript -->
+        </div>
+    </section>
+
+    <!-- Sección de Bebidas -->
+<section id="bebidas" class="container mx-auto py-12 px-4 bg-gradient-to-br from-orange-50 to-yellow-50">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-orange-700">Nuestras Bebidas</h2>
+    <div id="productos-bebidas" class="grid md:grid-cols-3 gap-6">
+        <!-- Las bebidas se generarán dinámicamente con JavaScript -->
+    </div>
+</section>
+
+<!-- Sección de Promociones -->
+<section id="promociones" class="container mx-auto py-12 px-4 bg-gradient-to-br from-green-50 to-lime-50">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-green-700">Promociones Especiales</h2>
+    <div id="productos-promociones" class="grid md:grid-cols-3 gap-6">
+        <!-- Las promociones se generarán dinámicamente con JavaScript -->
+    </div>
+</section>
+
+    <!-- Sección de Contacto -->
+<section id="contacto" class="container mx-auto py-16 px-4 bg-white">
+    <div class="text-center mb-12">
+        <h2 class="text-4xl font-bold text-red-700 mb-4">Tu Opinión Cuenta</h2>
+        <p class="text-gray-600">Queremos escuchar tus comentarios, sugerencias y opiniones para mejorar.</p>
+    </div>
+    <div class="max-w-lg mx-auto bg-gray-100 p-8 rounded-xl shadow-lg">
+        <form id="contact-form" class="space-y-6" onsubmit="enviarWhatsApp(event)">
+            <div>
+                <label class="block text-gray-700 mb-2">Nombre (opcional)</label>
+                <input id="nombre" type="text" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-red-500" placeholder="Escribe tu nombre">
+            </div>
+            <div>
+                <label class="block text-gray-700 mb-2">Correo Electrónico (opcional)</label>
+                <input id="correo" type="email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-red-500" placeholder="Escribe tu correo">
+            </div>
+            <div>
+                <label class="block text-gray-700 mb-2">Tu Comentario o Sugerencia</label>
+                <textarea id="mensaje" required rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:border-red-500" placeholder="Escribe tu mensaje aquí..."></textarea>
+            </div>
+            <button type="submit" class="w-full bg-red-600 text-white py-3 rounded-full hover:bg-red-700 transition">
+                Enviar Opinión
+            </button>
+        </form>
+    </div>
+</section>
+
+<script>
+    function enviarWhatsApp(event) {
+        event.preventDefault(); // Evita que se recargue la página
+
+        // Obtén los valores de los campos del formulario
+        const nombre = document.getElementById("nombre").value || "Anónimo";
+        const correo = document.getElementById("correo").value || "No proporcionado";
+        const mensaje = document.getElementById("mensaje").value;
+
+        // Construye el mensaje para WhatsApp
+        const texto = `Hola, aquí tienes un nuevo comentario:%0A📝 Nombre: ${nombre}%0A📧 Correo: ${correo}%0A✍️ Mensaje: ${mensaje}`;
+
+        // Número de WhatsApp al que quieres enviar el mensaje (incluye código de país, sin el "+")
+        const numeroWhatsApp = "522218898926"; // Reemplaza con tu número
+
+        // URL de WhatsApp
+        const url = `https://wa.me/2218898926?text=${texto}`;
+
+        // Redirige al usuario a WhatsApp
+        window.open(url, "_blank");
+    }
+</script>
+
+
+<script>
+    function enviarWhatsApp(event) {
+        event.preventDefault(); // Evita que se recargue la página
+
+        // Obtén los valores de los campos del formulario
+        const nombre = document.getElementById("nombre").value;
+        const correo = document.getElementById("correo").value;
+        const mensaje = document.getElementById("mensaje").value;
+
+        // Construye el mensaje para WhatsApp
+        const texto = `Hola, soy ${nombre}.%0A📧 Correo: ${correo}%0A📝 Mensaje: ${mensaje}`;
+
+        // Número de WhatsApp al que quieres enviar el mensaje (incluye código de país, sin el "+")
+        const numeroWhatsApp = "5211234567890"; // Reemplaza con tu número
+
+        // URL de WhatsApp
+        const url = `https://wa.me/2218898926?text=${texto}`;
+
+        // Redirige al usuario a WhatsApp
+        window.open(url, "_blank");
+    }
+</script>
+
+
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="text-center md:text-left mb-6 md:mb-0">
+                <h3 class="text-2xl font-bold mb-2">Taqueria El Taco Loco</h3>
+                <p>Tlapa de Comonfort Guerrero</p>
+                <p>Instituto Tecnológico Superior de la Motaña</p>
+                <p>+52 221 889 8926</p>
+            </div>
+            <div class="flex space-x-6">
+                <a href="https://facebook.com" target="_blank" class="text-3xl hover:text-red-500 transition">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="text-3xl hover:text-red-500 transition">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://twitter.com" target="_blank" class="text-3xl hover:text-red-500 transition">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://wa.me/5512345678" target="_blank" class="text-3xl hover:text-green-500 transition">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+        <div class="text-center mt-6 text-gray-400">
+            © 2024 Tacos El Fuego. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <!-- Modal Carrito Mejorado y Responsivo -->
+<div id="modal-carrito" class="fixed inset-0 bg-black bg-opacity-50 z-[100] hidden items-center justify-center">
+    <div class="bg-white rounded-3xl w-[90%] md:w-3/4 lg:w-2/3 max-h-[80vh] overflow-y-auto p-6 sm:p-8 relative shadow-2xl">
+        <!-- Botón de Cerrar -->
+        <button onclick="cerrarCarrito()" class="absolute top-4 right-4 text-gray-400 hover:text-red-500 transition">
+            <i class="fas fa-times text-2xl"></i>
+        </button>
+
+        <!-- Encabezado del Carrito -->
+        <h3 class="text-2xl sm:text-3xl font-bold text-red-700 mb-6 text-center">
+            <i class="fas fa-shopping-cart mr-2"></i>Tu Carrito
+        </h3>
+
+        <!-- Productos en el Carrito -->
+        <div id="lista-carrito" class="space-y-4 sm:space-y-6">
+            <!-- Los productos se generarán dinámicamente con JavaScript -->
+        </div>
+
+        <!-- Total del Carrito -->
+        <div class="border-t border-gray-200 mt-6 pt-6">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+                <span class="text-xl sm:text-2xl font-bold text-gray-700">Total:</span>
+                <span id="total-carrito" class="text-xl sm:text-2xl font-bold text-red-700">$0.00</span>
+            </div>
+        </div>
+
+        <!-- Botón de Enviar Pedido -->
+        <button onclick="enviarPedidoWhatsApp()" class="w-full bg-green-500 text-white py-3 sm:py-4 rounded-full mt-6 text-lg font-semibold hover:bg-green-600 transition">
+            <i class="fab fa-whatsapp mr-2"></i>Enviar Pedido por WhatsApp
+        </button>
+    </div>
+</div>
+
+
+    <script>
+        // Datos de productos
+        const productos = [
+            { 
+                id: 1, 
+                nombre: 'Tacos Dorados', 
+                descripcion: 'TODO LO MEJOR EN EL MENÚ', 
+                precio: 25, 
+                imagen: 'dorados.jpg'
+            },
+            { 
+                id: 2, 
+                nombre: 'Tacos de Suadero', 
+                descripcion: 'TODO LO MEJOR EN EL MENÚ', 
+                precio: 25, 
+                imagen: '2.jpg'
+            },
+            { 
+                id: 3, 
+                nombre: 'Enchiladas', 
+                descripcion: 'TODO LO MEJOR EN EL MENÚ', 
+                precio: 25, 
+                imagen: 'enchiladas.jpg'
+            }
+        ];
+
+        // Datos de bebidas
+const bebidas = [
+    { 
+        id: 1, 
+        nombre: 'Agua de Jamaica', 
+        descripcion: 'Fresca y deliciosa', 
+        precio: 25, 
+        imagen: 'jamaica.jpg' 
+    },
+    { 
+        id: 2, 
+        nombre: 'Refresco Embotellado', 
+        descripcion: 'Tu favorito bien frío', 
+        precio: 30, 
+        imagen: 'BOTELLA.jpg' 
+    },
+    { 
+        id: 3, 
+        nombre: 'Agua de Horchata', 
+        descripcion: 'Para acompañar tus tacos', 
+        precio: 50, 
+        imagen: 'horchata.jpg' 
+    }
+];
+
+// Datos de promociones
+const promociones = [
+    { 
+        id: 1, 
+        nombre: 'Combo Familiar', 
+        descripcion: '--------------------------------------------', 
+        precio: 250, 
+        imagen: 'combo.jpg' 
+    },
+    { 
+        id: 2, 
+        nombre: 'Taco Tuesday', 
+        descripcion: '---------------------------------------------', 
+        precio: 50, 
+        imagen: 'promo.jpg' 
+    },
+    { 
+        id: 3, 
+        nombre: 'Miercoles loco', 
+        descripcion: '---------------------------------------------', 
+        precio: 120, 
+        imagen: 'parrillada.jpg' 
+    }
+];
+
+
+        let carrito = [];
+
+        function renderProductos() {
+            const productosDiv = document.getElementById('productos');
+            productosDiv.innerHTML = productos.map(producto => `
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition">
+                    <img src="${producto.imagen}" alt="${producto.nombre}" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-red-700">${producto.nombre}</h3>
+                        <p class="text-gray-600 mb-2">${producto.descripcion}</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-red-600 font-bold text-lg">$${producto.precio.toFixed(2)}</span>
+                            <button onclick="agregarAlCarrito(${producto.id})" 
+                                class="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600">
+                                Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderBebidas() {
+    const bebidasDiv = document.getElementById('productos-bebidas');
+    bebidasDiv.innerHTML = bebidas.map(bebida => `
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition">
+            <img src="${bebida.imagen}" alt="${bebida.nombre}" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold text-orange-700">${bebida.nombre}</h3>
+                <p class="text-gray-600 mb-2">${bebida.descripcion}</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-orange-600 font-bold text-lg">$${bebida.precio.toFixed(2)}</span>
+                    <button onclick="agregarAlCarrito(${bebida.id})" 
+                        class="bg-orange-500 text-white px-4 py-2 rounded-full hover:bg-orange-600">
+                        Agregar
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderPromociones() {
+    const promocionesDiv = document.getElementById('productos-promociones');
+    promocionesDiv.innerHTML = promociones.map(promocion => `
+        <div class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition">
+            <img src="${promocion.imagen}" alt="${promocion.nombre}" class="w-full h-48 object-cover">
+            <div class="p-4">
+                <h3 class="text-xl font-bold text-green-700">${promocion.nombre}</h3>
+                <p class="text-gray-600 mb-2">${promocion.descripcion}</p>
+                <div class="flex justify-between items-center">
+                    <span class="text-green-600 font-bold text-lg">$${promocion.precio.toFixed(2)}</span>
+                    <button onclick="agregarAlCarrito(${promocion.id})" 
+                        class="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600">
+                        Agregar
+                    </button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Llamar las funciones para mostrar las nuevas secciones
+renderBebidas();
+renderPromociones();
+
+
+function agregarAlCarrito(id) {
+    const producto = productos.find(p => p.id === id) || bebidas.find(p => p.id === id) || promociones.find(p => p.id === id);
+    const existente = carrito.find(p => p.id === id);
+
+    if (existente) {
+        existente.cantidad++;
+    } else {
+        carrito.push({...producto, cantidad: 1});
+    }
+
+    // Mostrar notificación animada
+    Swal.fire({
+        title: '¡Producto agregado!',
+        text: `${producto.nombre} ha sido añadido al carrito.`,
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500, // Notificación dura 1.5 segundos
+        customClass: {
+            popup: 'animate__animated animate__fadeInDown',
+        },
+    });
+
+    actualizarCarrito();
+}
+function actualizarCarrito() {
+    const listaCarrito = document.getElementById('lista-carrito');
+    const totalCarrito = document.getElementById('total-carrito');
+    const contadorCarrito = document.getElementById('contador-carrito');
+    const contadorCarritoMovil = document.getElementById('contador-carrito-movil');
+
+    // Crear tarjetas para cada producto en el carrito
+    listaCarrito.innerHTML = carrito.map(item => `
+        <div class="flex flex-col sm:flex-row items-center sm:items-start bg-gray-100 rounded-xl p-4 shadow-md">
+            <!-- Imagen del Producto -->
+            <img src="${item.imagen}" alt="${item.nombre}" class="h-20 w-20 sm:h-24 sm:w-24 rounded-lg object-cover mb-4 sm:mb-0 sm:mr-4">
+            <div class="flex-1 text-center sm:text-left">
+                <!-- Nombre y Descripción -->
+                <h4 class="font-bold text-lg sm:text-xl text-gray-700">${item.nombre}</h4>
+                <p class="text-sm sm:text-base text-gray-500">Precio: $${item.precio.toFixed(2)}</p>
+                <p class="text-sm sm:text-base text-gray-500">Cantidad: ${item.cantidad}</p>
+            </div>
+            <div class="flex items-center space-x-3 mt-4 sm:mt-0">
+                <!-- Botones de Cantidad -->
+                <button onclick="cambiarCantidad(${item.id}, -1)" class="bg-red-500 text-white px-3 py-2 rounded-lg hover:bg-red-600 transition">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button onclick="cambiarCantidad(${item.id}, 1)" class="bg-green-500 text-white px-3 py-2 rounded-lg hover:bg-green-600 transition">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <!-- Botón de Eliminar -->
+                <button onclick="eliminarDelCarrito(${item.id})" class="text-gray-400 hover:text-red-500 transition">
+                    <i class="fas fa-trash text-xl"></i>
+                </button>
+            </div>
+        </div>
+    `).join('');
+
+    // Actualizar el total y contador del carrito
+    const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+    totalCarrito.textContent = `$${total.toFixed(2)}`;
+    const cantidadTotal = carrito.reduce((sum, item) => sum + item.cantidad, 0);
+    contadorCarrito.textContent = cantidadTotal;
+    contadorCarritoMovil.textContent = cantidadTotal;
+}
+
+function abrirCarrito() {
+    const modal = document.getElementById('modal-carrito');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+}
+
+function cerrarCarrito() {
+    const modal = document.getElementById('modal-carrito');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+}
+
+
+        function cambiarCantidad(id, delta) {
+            const item = carrito.find(p => p.id === id);
+            if (item) {
+                item.cantidad = Math.max(0, item.cantidad + delta);
+                if (item.cantidad === 0) {
+                    carrito = carrito.filter(p => p.id !== id);
+                }
+                actualizarCarrito();
+            }
+        }
+
+        function eliminarDelCarrito(id) {
+            carrito = carrito.filter(p => p.id !== id);
+            actualizarCarrito();
+        }
+
+        function enviarPedidoWhatsApp() {
+            if (carrito.length === 0) {
+                Swal2.fire('Carrito vacío', 'Agrega algunos productos primero', 'warning');
+                return;
+            }
+
+            const mensaje = carrito.map(item => 
+                `• ${item.nombre} x${item.cantidad} - $${(item.precio * item.cantidad).toFixed(2)}`
+            ).join('%0A');
+
+            const total = carrito.reduce((sum, item) => sum + (item.precio * item.cantidad), 0);
+            const mensajeFinal = `Pedido de Taqueria El Taco Loco%0ADetalle:%0A${mensaje}%0A%0ATotal: $${total.toFixed(2)}`;
+
+            window.open(`https://wa.me/2218898926?text=${mensajeFinal}`, '_blank');
+        }
+
+        function toggleMenu() {
+            const menu = document.getElementById('menu-mobile');
+            menu.classList.toggle('hidden');
+        }
+
+        document.getElementById('carrito-btn').addEventListener('click', () => {
+            const modal = document.getElementById('modal-carrito');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        });
+
+        function cerrarCarrito() {
+            const modal = document.getElementById('modal-carrito');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Inicializar
+        renderProductos();
+    </script>
+</body>
+</html>
