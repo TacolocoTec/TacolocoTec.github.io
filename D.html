@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>D. Mezcla de números</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --background-color: #f4f7f6;
+            --text-color: #333;
+            --code-background: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: var(--code-background);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 700px;
+            padding: 30px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 15px;
+        }
+
+        .header h1 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .code-wrapper {
+            position: relative;
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--secondary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: #2980b9;
+        }
+
+        pre {
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 0.9rem;
+            color: #333;
+            overflow-x: auto;
+        }
+
+        .code-info {
+            background: #f1f3f4;
+            padding: 15px;
+            border-radius: 6px;
+            text-align: center;
+            font-style: italic;
+            color: #666;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>D. Mezcla de números</h1>
+            <p>Programa Java. Avirodrian</p>
+        </div>
+
+        <div class="code-wrapper">
+            <button class="copy-btn" onclick="copyCode()">Copiar Código</button>
+            <pre><code>
+
+                import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Leer los valores de N y M
+        int N = scanner.nextInt();
+        int M = scanner.nextInt();
+
+        // Leer la primera lista
+        List<Integer> listA = new ArrayList<>();
+        for (int i = 0; i < N; i++) {
+            listA.add(scanner.nextInt());
+        }
+
+        // Leer la segunda lista
+        List<Integer> listB = new ArrayList<>();
+        for (int i = 0; i < M; i++) {
+            listB.add(scanner.nextInt());
+        }
+
+        // Fusionar las dos listas
+        List<Integer> mergedList = mergeSortedLists(listA, listB);
+
+        // Imprimir la lista fusionada
+        for (int number : mergedList) {
+            System.out.print(number + " ");
+        }
+    }
+
+    // Método para fusionar dos listas ordenadas
+    private static List<Integer> mergeSortedLists(List<Integer> listA, List<Integer> listB) {
+        List<Integer> mergedList = new ArrayList<>();
+        int i = 0, j = 0;
+
+        // Fusionar las listas
+        while (i < listA.size() && j < listB.size()) {
+            if (listA.get(i) < listB.get(j)) {
+                mergedList.add(listA.get(i));
+                i++;
+            } else {
+                mergedList.add(listB.get(j));
+                j++;
+            }
+        }
+
+        // Agregar elementos restantes de listA
+        while (i < listA.size()) {
+            mergedList.add(listA.get(i));
+            i++;
+        }
+
+        // Agregar elementos restantes de listB
+        while (j < listB.size()) {
+            mergedList.add(listB.get(j));
+            j++;
+        }
+
+        return mergedList;
+    }
+}
+
+            </code></pre>
+        </div>
+
+        <div class="code-info">
+            <p>Código desarrollado por Avirodrian Ogirdor</p>
+        </div>
+    </div>
+
+    <script>
+        function copyCode() {
+            const codeElement = document.querySelector('pre code');
+            const textArea = document.createElement('textarea');
+            textArea.value = codeElement.textContent;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            const copyBtn = document.querySelector('.copy-btn');
+            copyBtn.textContent = 'Copiado';
+            copyBtn.style.background = '#27ae60';
+            setTimeout(() => {
+                copyBtn.textContent = 'Copiar Código';
+                copyBtn.style.background = '#3498db';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
